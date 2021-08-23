@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<th:block layout:fragment="header"
+          th:include="@{/fragments/header}">
+</th:block>
+<script>
+    function test(ymd, cd) {
+        var getYmd = "?ymd=" + ymd;
+        var getCd = "&cd=" + cd;
+
+        $("#apiTest").empty();
+        $.ajax({
+            url:'http://localhost:8081/apiTest' + getYmd + getCd,
+            type:'GET',
+            dataType:'xml',
+            success: function(data) {
+                $(data).find("item").each(function() {
+                    var year = $(this).find("년").text();
+                    var dong = $(this).find("법정동").text();
+                    var apart = $(this).find("아파트").text();
+
+                    var text = year + dong + " " + apart + "</br>";
+                    $("#apiTest").append(text);
+                });
+            },
+            error:function(jqXHR) {
+                console.log("요청 실패");
+            }
+        });
+    };
+</script>
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+  <!-- Page Heading -->
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Dash Board</h1>
+    <a href="/members" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+      회원 목록
+    </a>
+  </div>
+  <!-- Content Row -->
+  <div class="row">
+    <input type="text" id="ymd" placeholder="년월(201512)">
+    <input type="text" id="cd" placeholder="지역(11110)">
+    <button type="button" onclick="test(ymd.value, cd.value)">테스트</button>
+    <div id = "apiTest"></div>
+  </div>
+</div>
+
+
+<th:block layout:fragment="footer"
+          th:include="@{/fragments/footer}">
+</th:block>
+
+
+</html>

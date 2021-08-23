@@ -1,0 +1,34 @@
+plugins {
+	id 'org.springframework.boot' version '2.5.3'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'pj210728'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
+	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// https://mvnrepository.com/artifact/mysql/mysql-connector-java
+	implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.26'
+
+	// https://mvnrepository.com/artifact/aspectj/aspectjrt
+	implementation group: 'aspectj', name: 'aspectjrt', version: '1.5.4'
+
+	// https://mvnrepository.com/artifact/org.aspectj/aspectjweaver
+	runtimeOnly group: 'org.aspectj', name: 'aspectjweaver', version: '1.9.7'
+}
+
+test {
+	useJUnitPlatform()
+}
