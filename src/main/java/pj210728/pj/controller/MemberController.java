@@ -10,6 +10,7 @@ import pj210728.pj.domain.Member;
 import pj210728.pj.service.MybatisMemberService;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -63,10 +64,12 @@ public class MemberController {
     }
 
     @PostMapping("/members/login")
-    public ModelAndView login(MemberForm form, ModelAndView mav) {
+    public ModelAndView login(MemberForm form, ModelAndView mav, HttpServletRequest request) {
         boolean check = memberService.LoginCheck(form.getName(), form.getPassword());
 
         if (check) {
+            HttpSession session = request.getSession();
+            session.setAttribute("userName", form.getName());
             mav.addObject("data", new MessageForm("로그인 성공", "/"));
         } else {
             mav.addObject("data", new MessageForm("로그인 실패", "/members/login"));
@@ -75,6 +78,16 @@ public class MemberController {
         mav.setViewName("message");
         return mav;
     } // login
+
+    @GetMapping("/members/logout")
+    public ModelAndView logout(ModelAndView mav, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        session.invalidate();
+        mav.addObject("data", new MessageForm("로그아웃 성공", "/"));
+        mav.setViewName("message");
+        return mav;
+    } // logout
+
 
 }
 
