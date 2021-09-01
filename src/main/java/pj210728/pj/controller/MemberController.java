@@ -70,6 +70,7 @@ public class MemberController {
         if (check) {
             HttpSession session = request.getSession();
             session.setAttribute("userName", form.getName());
+            session.setAttribute("userMail", form.getEmail());
             mav.addObject("data", new MessageForm("로그인 성공", "/"));
         } else {
             mav.addObject("data", new MessageForm("로그인 실패", "/members/login"));
@@ -81,8 +82,9 @@ public class MemberController {
 
     @GetMapping("/members/logout")
     public ModelAndView logout(ModelAndView mav, HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        session.invalidate();
+        request.getSession().invalidate();
+        request.getSession(true);
+
         mav.addObject("data", new MessageForm("로그아웃 성공", "/"));
         mav.setViewName("message");
         return mav;
