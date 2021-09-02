@@ -10,7 +10,7 @@ import java.net.URL;
 
 @RestController
 public class ApiController {
-    @GetMapping("/apiTest")
+    @GetMapping(value = "/apiTest", produces = "application/text; charset=utf8")
     public String callApiHttp(@RequestParam("ymd") String ymd, @RequestParam("cd") String cd) {
         StringBuffer result = new StringBuffer();
 
