@@ -1,14 +1,8 @@
 package pj210728.pj;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import pj210728.pj.Mapper.MemberMapper;
-import pj210728.pj.aop.TimeTraceAop;
-import pj210728.pj.repository.JdbcTemplateMemberRepository;
-import pj210728.pj.repository.MemberRepository;
-import pj210728.pj.service.MemberService;
-import pj210728.pj.service.MybatisMemberService;
+
 
 import javax.sql.DataSource;
 
