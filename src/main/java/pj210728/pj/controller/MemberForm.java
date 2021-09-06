@@ -2,7 +2,7 @@ package pj210728.pj.controller;
 
 public class MemberForm {
     private String name;
-    private String eMail;
+    private String email;
     private String password;
 
     public String getName() {
@@ -14,11 +14,11 @@ public class MemberForm {
     }
 
     public String getEmail() {
-        return eMail;
+        return email;
     }
 
-    public void setEmail(String eMail) {
-        this.eMail = eMail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {

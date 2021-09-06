@@ -2,7 +2,6 @@ package pj210728.pj.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -11,7 +10,7 @@ import pj210728.pj.service.MybatisMemberService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class MemberController {
@@ -50,14 +49,6 @@ public class MemberController {
         }
     }
 
-    @GetMapping("/members")
-    public String list(Model model) {
-        List<Member> members = memberService.findMembers();
-        model.addAttribute("members", members);
-
-        return "members/memberList";
-    }
-
     @GetMapping("/members/login")
     public String loginForm() {
         return "members/memberLogin";
@@ -65,11 +56,13 @@ public class MemberController {
 
     @PostMapping("/members/login")
     public ModelAndView login(MemberForm form, ModelAndView mav, HttpServletRequest request) {
-        boolean check = memberService.LoginCheck(form.getName(), form.getPassword());
+        boolean check = memberService.LoginCheck(form.getEmail(), form.getPassword());
 
         if (check) {
+            Optional<Member> members = memberService.findOneEmail(form.getEmail());
             HttpSession session = request.getSession();
-            session.setAttribute("userName", form.getName());
+            assert members.orElse(null) != null;
+            session.setAttribute("userName", members.orElse(null).getName());
             session.setAttribute("userMail", form.getEmail());
             mav.addObject("data", new MessageForm("로그인 성공", "/"));
         } else {

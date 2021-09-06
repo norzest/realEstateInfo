@@ -120,8 +120,13 @@
         <!-- Main Content -->
         <div id="content">
             <!-- Topbar -->
-            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+            <nav th:if="${session.userName == Null}"
+                 class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
                 안녕하세요
+            </nav>
+            <nav th:if="${session.userName != Null}"
+                 th:text="'안녕하세요 ' + ${session.userName} + ' 님'"
+                 class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
             </nav>
             <!-- End of Topbar -->
 
@@ -130,15 +135,15 @@
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">Dash Board</h1>
-                    <a href="/members" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                        회원 목록
-                    </a>
                 </div>
                 <!-- Content Row -->
                 <div class="row">
                     <input type="text" id="ymd" placeholder="년월(201512)">
                     <input type="text" id="cd" placeholder="지역(11110)">
-                    <button type="button" onclick="test(ymd.value, cd.value)" title="test">테스트</button>
+                    <a onclick="test(ymd.value, cd.value)" title="test"
+                       class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                        테스트
+                    </a>
                 </div>
                 <div id="apiTest"></div>
             </div>

@@ -18,7 +18,7 @@ public class MvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(loginInterceptor())
-                .addPathPatterns("/members");
+                .addPathPatterns("/apiTest");
     }
 
     // 정적 파일들 매핑 (html 파일의 src 나 href)

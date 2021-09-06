@@ -42,8 +42,8 @@ public class MybatisMemberService {
     /**
      * 가입 한 회원인지 확인
      */
-    public boolean LoginCheck(String name, String password) {
-        Optional<Member> member = mapper.findByNamePassword(name, password);
+    public boolean LoginCheck(String eMail, String password) {
+        Optional<Member> member = mapper.findByEmailPassword(eMail, password);
 
         return member.isPresent();
     }
@@ -58,6 +58,10 @@ public class MybatisMemberService {
     /**
      * 특정 회원 조회
      */
+    public Optional<Member> findOneEmail(String memberEmail) {
+        return mapper.findByEmail(memberEmail);
+    }
+
     public Optional<Member> findOneName(String memberName) {
         return mapper.findByName(memberName);
     }

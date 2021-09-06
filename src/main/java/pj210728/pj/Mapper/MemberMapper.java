@@ -17,11 +17,14 @@ public interface MemberMapper {
     @Select("select * from member where id = #{id}")
     Optional<Member> findById(@Param("id") Long id);
 
+    @Select("select * from member where eMail = #{eMail}")
+    Optional<Member> findByEmail(@Param("eMail") String eMail);
+
     @Select("select * from member where name = #{name}")
     Optional<Member> findByName(@Param("name") String name);
 
-    @Select("select * from member where name = #{name} and password = #{password}")
-    Optional<Member> findByNamePassword(@Param("name") String name,
+    @Select("select * from member where eMail = #{eMail} and password = #{password}")
+    Optional<Member> findByEmailPassword(@Param("eMail") String eMail,
                                         @Param("password") String password);
 
     @Select("select * from member")
