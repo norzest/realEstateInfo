@@ -15,11 +15,14 @@ public class MvcConfig implements WebMvcConfigurer {
         return new LoginInterceptor();
     }
     // 로그인 하지 않으면 특정 경로 이동 불가 (/members)
+
+    /*
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(loginInterceptor())
                 .addPathPatterns("/apiTest");
     }
+    */
 
     // 정적 파일들 매핑 (html 파일의 src 나 href)
     @Override
