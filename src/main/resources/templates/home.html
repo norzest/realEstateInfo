@@ -5,8 +5,18 @@
 </th:block>
 
 <script type="text/javascript">
-    function test(ymd, cd) {
-        var getYmd = "?ymd=" + ymd;
+    $(document).ready(function(){
+        setDateBox();
+    });
+
+    function fillZero(width, str) {
+        //남는 길이만큼 0으로 채움
+        return str.length >= width ? str:new Array(width-str.length+1).join('0')+str;
+    }
+
+    function test(y, m, cd) {
+        m = fillZero(2, m);
+        var getYmd = "?ymd=" + y + m;
         var getCd = "&cd=" + cd;
 
         $("#apiTest").empty();
@@ -32,6 +42,24 @@
             }
         });
     };
+
+    function setDateBox() {
+        var dt = new Date();
+        var year = "";
+        var com_year = dt.getFullYear();
+
+
+        // 올해 기준으로 -30년부터 +0년을 보여준다.
+        for(var y = (com_year-30); y <= (com_year); y++){
+            $("#year_select").append("<option value='"+ y +"'>"+ y + " 년" +"</option>");
+        }
+
+        // 월 뿌려주기(1월부터 12월)
+        for(var i = 1; i <= 12; i++){
+            $("#month_select").append("<option value='"+ i +"'>"+ i + " 월" +"</option>");
+        }
+
+    }
 
 </script>
 <body id="page-top">
@@ -135,9 +163,10 @@
                 </div>
                 <!-- Content Row -->
                 <div class="row">
-                    <input type="text" id="ymd" placeholder="년월(201512)">
+                    <select name="year_select" id="year_select" title="년도"></select>
+                    <select name="month_select" id="month_select" title="월"></select>
                     <input type="text" id="cd" placeholder="지역(11110)">
-                    <a onclick="test(ymd.value, cd.value)" title="test"
+                    <a onclick="test(year_select.value, month_select.value, cd.value)" title="test"
                        class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                         테스트
                     </a>
