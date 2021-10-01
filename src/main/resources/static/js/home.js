@@ -61,10 +61,10 @@
                     "포천시" : "650", "하남시" : "450", "화성시" : "590"
                 },
                 "28" : {
-
+                    "" : ""
                 }
             };
-            console.log(dsCode[ds], sggCode[dsCode[ds]][sgg]);
+            //console.log(dsCode[ds], sggCode[dsCode[ds]][sgg]);
             return "11110";
         }
 
@@ -120,8 +120,8 @@
         var year = "";
         var com_year = dt.getFullYear();
 
-        // 년도 추가 -30년부터 +0년
-        for(var y = (com_year-30); y <= (com_year); y++){
+        // 년도 추가 -30년부터 -1년
+        for(var y = (com_year-30); y <= (com_year-1); y++){
             $("#year_select").append("<option value='"+ y +"'>"+ y + " 년" +"</option>");
         }
         addMonth();
