@@ -4,7 +4,6 @@
           th:include="@{/fragments/header}">
 </th:block>
 
-<script th:src="@{/js/home.js}"></script>
 <body id="page-top">
 <div id="wrapper">
     <th:block layout:fragment="menu"
@@ -33,17 +32,7 @@
                     <h1 class="h3 mb-0 text-gray-800">Dash Board</h1>
                 </div>
                 <!-- Content Row -->
-                <div class="row">
-                    <select name="year_select" id="year_select" title="년도"></select>
-                    <select name="month_select" id="month_select" title="월"></select>
-                    <select name="do_select" id="do_select" title="도/특별시"></select>
-                    <select name="si_select" id="si_select" title="시/군/구"></select>
-                    <a onclick="getApi(year_select.value, month_select.value, do_select.value, si_select.value)"
-                       title="getApiButton" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                        불러오기
-                    </a>
-                </div>
-                <div id="apiTest"></div>
+
             </div>
         </div>
         <!-- End of Main Content -->
