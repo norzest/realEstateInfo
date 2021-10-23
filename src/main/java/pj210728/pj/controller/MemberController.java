@@ -25,6 +25,7 @@ public class MemberController {
         this.memberService = memberService;
     }
 
+    // 회원가입
     @GetMapping("/members/new")
     public String createForm() {
         return "members/createMemberForm";
@@ -49,6 +50,7 @@ public class MemberController {
         }
     }
 
+    // 로그인
     @GetMapping("/members/login")
     public String loginForm() {
         return "members/memberLogin";
@@ -73,6 +75,7 @@ public class MemberController {
         return mav;
     } // login
 
+    // 로그아웃
     @GetMapping("/members/logout")
     public ModelAndView logout(ModelAndView mav, HttpServletRequest request) {
         request.getSession().invalidate();
