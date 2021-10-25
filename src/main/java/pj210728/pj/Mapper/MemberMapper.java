@@ -14,6 +14,10 @@ public interface MemberMapper {
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void save(@Param("member") Member member);
 
+    @Update("update member set password = #{password} where email = #{eMail}")
+    void updatePassword(@Param("eMail") String eMail,
+                        @Param("password") String password);
+
     @Select("select * from member where id = #{id}")
     Optional<Member> findById(@Param("id") Long id);
 

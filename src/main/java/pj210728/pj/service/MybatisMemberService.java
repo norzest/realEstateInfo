@@ -70,4 +70,8 @@ public class MybatisMemberService {
         return mapper.findById(memberId);
     }
 
+    public void updatePassword(String memberEmail, String memberPwd){
+        mapper.updatePassword(memberEmail, memberPwd);
+    }
+
 }

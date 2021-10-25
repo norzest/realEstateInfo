@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import pj210728.pj.domain.Member;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class myPageController {
     @GetMapping("/members/myPage")
@@ -20,8 +23,12 @@ public class myPageController {
     }
 
     @PostMapping("/members/myPage/updatePassword")
-    public String updatePassword() {
-
+    public String updatePassword(PasswordForm form, ModelAndView mav, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Member member = new Member();
+        member.setName((String)session.getAttribute("userName"));
+        member.setEmail((String)session.getAttribute("userMail"));
+        member.setPassword(form.getCurPwd());
 
         return "";
     }
