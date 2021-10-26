@@ -18,6 +18,9 @@ public interface MemberMapper {
     void updatePassword(@Param("eMail") String eMail,
                         @Param("password") String password);
 
+    @Delete("delete from member where eMail = #{eMail}")
+    void deleteMember(@Param("eMail") String eMail);
+
     @Select("select * from member where id = #{id}")
     Optional<Member> findById(@Param("id") Long id);
 

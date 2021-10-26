@@ -70,8 +70,16 @@ public class MybatisMemberService {
         return mapper.findById(memberId);
     }
 
+    /**
+     * 비밀번호 변경
+     */
     public void updatePassword(String memberEmail, String memberPwd){
         mapper.updatePassword(memberEmail, memberPwd);
     }
+
+    /**
+     * 멤버 삭제
+     */
+    public void deleteMember(String memberEmail) {mapper.deleteMember(memberEmail);}
 
 }
