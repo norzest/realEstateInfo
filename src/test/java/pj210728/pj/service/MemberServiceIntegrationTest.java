@@ -23,7 +23,7 @@ class MemberServiceIntegrationTest {
         //given
         Member member = new Member();
         member.setName("test");
-        member.setEmail("test@test.com");
+        member.setEmail("test@testt.com");
         member.setPassword("1234");
 
         //when
@@ -39,18 +39,35 @@ class MemberServiceIntegrationTest {
         //given
         Member member1 = new Member();
         member1.setName("spring");
-        member1.setEmail("test@test.com");
+        member1.setEmail("test@testt.com");
+        member1.setPassword("1234");
         Member member2 = new Member();
         member2.setName("spring");
-        member2.setEmail("test@test.com");
+        member2.setEmail("test@testt.com");
+        member2.setPassword("1234");
 
         //when
         memberService.join(member1);
+
+        //then
         // join(member2) 하면 exception 이 터져야 함 그러면 테스트 성공
         IllegalStateException e = assertThrows(IllegalStateException.class, () -> memberService.join(member2));
         assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원");
-
-        //then
     }
 
+    @Test
+    public void 회원_탈퇴() {
+        //given
+        Member member = new Member();
+        member.setName("spring");
+        member.setEmail("test@testt.com");
+        member.setPassword("1234");
+
+        //when
+        Long saveId = memberService.join(member);
+        memberService.deleteMember(member.getEmail());
+
+        //then
+        assertThat(memberService.findOneId(saveId)).isEmpty();
+    }
 }
