@@ -50,6 +50,17 @@ public class MemberController {
         }
     }
 
+    // 이메일 비밀번호 찾기
+    @GetMapping("/members/find")
+    public String findForm() {
+        return "members/memberFind";
+    }
+
+    @PostMapping("/members/find")
+    public String find() {
+        return "members/memberFind";
+    }
+
     // 로그인
     @GetMapping("/members/login")
     public String loginForm() {
