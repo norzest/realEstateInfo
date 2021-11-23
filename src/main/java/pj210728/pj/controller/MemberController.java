@@ -27,12 +27,12 @@ public class MemberController {
 
     // 회원가입
     @GetMapping("/members/new")
-    public String createForm() {
+    public String createMember() {
         return "members/createMemberForm";
     }
 
     @PostMapping("/members/new")
-    public ModelAndView create(MemberForm form, ModelAndView mav) {
+    public ModelAndView createMember(MemberForm form, ModelAndView mav) {
         Member member = new Member();
         member.setName(form.getName());
         member.setEmail(form.getEmail());
@@ -52,23 +52,25 @@ public class MemberController {
 
     // 이메일 비밀번호 찾기
     @GetMapping("/members/find")
-    public String findForm() {
+    public String findMailPassword() {
         return "members/memberFind";
     }
 
     @PostMapping("/members/find")
-    public String find() {
-        return "members/memberFind";
+    public ModelAndView findMailPassword(MemberForm form, ModelAndView mav) {
+        mav.addObject("data", new MessageForm("회원가입 성공", "/members/find"));
+        mav.setViewName("message");
+        return mav;
     }
 
     // 로그인
     @GetMapping("/members/login")
-    public String loginForm() {
+    public String memberLogin() {
         return "members/memberLogin";
     }
 
     @PostMapping("/members/login")
-    public ModelAndView login(MemberForm form, ModelAndView mav, HttpServletRequest request) {
+    public ModelAndView memberLogin(MemberForm form, ModelAndView mav, HttpServletRequest request) {
         boolean check = memberService.LoginCheck(form.getEmail(), form.getPassword());
 
         if (check) {

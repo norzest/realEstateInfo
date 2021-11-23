@@ -29,7 +29,7 @@ public class myPageController {
 
     // 비밀번호 변경
     @GetMapping("/members/myPage/updatePassword")
-    public String updatePasswordForm() {
+    public String updatePassword() {
         return "members/afterLogin/updatePasswordForm";
     }
 
